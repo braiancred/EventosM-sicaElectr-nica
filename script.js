@@ -63,10 +63,10 @@ console.log(valor)
 
 /* localStorage.removeItem("nuevoEvento") */
 
-const eventos = ({ id: 1, ciudad: "Buenos Aires", estilo: "progressive"},
+const eventos = [{ id: 1, ciudad: "Buenos Aires", estilo: "progressive"},
                 { id: 2, ciudad: "Rosario", estilo: "techno"},
                 { id: 3, ciudad: "Cordoba", estilo: "tech-house"},
-                { id: 4, ciudad: "Mendoza", estilo: "progressive"});
+                { id: 4, ciudad: "Mendoza", estilo: "progressive"}];
 
 const guardarLocal = (clave, valor) => {localStorage.setItem(clave, valor)}
 
@@ -75,4 +75,3 @@ for (const ciudad of eventos){
 }
 
 /* guardarLocal("ListaEventos", JSON.stringify(eventos)) */
-
