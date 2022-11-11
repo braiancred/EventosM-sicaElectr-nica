@@ -1,0 +1,62 @@
+[
+ {
+    "id": 11,
+    "nombre": "Buenos Aires",
+    "estilo": "techno",
+    "stock": 1
+ },
+ {
+    "id": 12,
+    "nombre": "Rosario",
+    "estilo": "tech-house",
+    "stock": 1
+ },
+ {
+    "id": 13,
+    "nombre": "Cordoba",
+    "estilo": "preogressive",
+    "stock": 1
+ },
+ {
+    "id": 14,
+    "nombre": "Mendoza",
+    "estilo": "techno",
+    "stock": 1
+ },
+ {
+    "id": 15,
+    "nombre": "Santa Fe",
+    "estilo": "progressive",
+    "stock": 1
+ },
+ {
+    "id": 16,
+    "nombre": "Bariloche",
+    "estilo": "tech-house",
+    "stock": 1
+ },
+ {
+    "id": 17,
+    "nombre": "Salta",
+    "estilo": "techno",
+    "stock": 1
+ },
+ {
+    "id": 18,
+    "nombre": "Concordia",
+    "estilo": "tech-house",
+    "stock": 1
+ },
+ {
+    "id": 19,
+    "nombre": "Bahía Blanca",
+    "estilo": "progressive",
+    "stock": 1
+ },
+ {
+    "id": 20,
+    "nombre": "Neuquén",
+    "estilo": "techno",
+    "stock": 1
+ }
+]

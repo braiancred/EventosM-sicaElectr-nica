@@ -1,57 +1,125 @@
-function Ciudad(nombre, estilo, stock){
-    this.nombre = nombre;
-    this.estilo = estilo;
-    this.stock = stock;
-} 
 
-/* con stock me refiero a si hay eventos en esa ciudad o no, es la forma que encontré de hacerlo. Si no hay, se le pone un 0 y entonces no aparece, Y si hay eventos en esa ciudad se le pone un 1 o cualquier numero mayor a 0 para que aparezca en la lista */
+const listaCiudades = [
+ {
+    id: 1,
+    nombre: "Buenos Aires",
+    estilo: "progressive",
+    stock: 1
+ },
+ {
+    id: 2,
+    nombre: "Rosario",
+    estilo: "techno",
+    stock: 1
+ },
+ {
+    id: 3,
+    nombre: "Cordoba",
+    estilo: "tech-house",
+    stock: 1
+ },
+ {
+    id: 4,
+    nombre: "Mendoza",
+    estilo: "progressive",
+    stock: 1
+ },
+ {
+    id: 5,
+    nombre: "Santa Fe",
+    estilo: "techno",
+    stock: 1
+ },
+ {
+    id: 6,
+    nombre: "Bariloche",
+    estilo: "progressive",
+    stock: 1
+ },
+ {
+    id: 7,
+    nombre: "Salta",
+    estilo: "tech-house",
+    stock: 1
+ },
+ {
+    id: 8,
+    nombre: "Concordia",
+    estilo: "techno",
+    stock: 1
+ },
+ {
+    id: 9,
+    nombre: "Bahía Blanca",
+    estilo: "tech-house",
+    stock: 1
+ },
+ {
+    id: 10,
+    nombre: "Neuquén",
+    estilo: "progressive",
+    stock: 1
+ }
+]
 
-let ciudadA = new Ciudad("Buenos Aires", "progressive", 1)
-let ciudadB = new Ciudad("Rosario", "techno", 1)
-let ciudadC = new Ciudad("Cordoba", "tech-house", 1)
-let ciudadD = new Ciudad("Mendoza", "progressive", 1)
-
-let listaCiudades = [ ciudadA, ciudadB, ciudadC, ciudadD ]
+fetch('data.json')
+.then((response) => response.json())
+.then((info) => render(info))
 
 let listaCiudadesconStock = listaCiudades.filter((ciudad) => ciudad.stock > 0)
 
-let listaNombres = listaCiudadesconStock.map((ciudad) => ciudad.nombre)
+let listaNombres = listaCiudadesconStock.map((ciudad) => ciudad.nombre) 
 
-let catalogo = document.getElementById("catalogo") 
+let catalog = document.getElementById('catalogo')
 
-function render(lista){
-    catalogo.innerHTML = ""
+let info = []
 
-    for(const ciudad of lista){
+listaCiudadesconStock.forEach((ciudad) => {
+   let container = document.createElement('div')
+   container.classList.add('card', 'col-sm-4')
 
-        let card = document.createElement("div")
+   //Cuerpo
+   let cardBody = document.createElement("div")
+   cardBody.classList.add('card-body')
+   //Ciudad
+   let cardCity = document.createElement("h2")
+   cardCity.classList.add('card-city')
+   cardCity.innerText = ciudad.nombre
+   //Estilo
+   let cardStile = document.createElement("h3")
+   cardStile.classList.add('card-stile')
+   cardStile.innerText = ciudad.estilo
+   //Botón
+   let cardButton = document.createElement("button")
+   cardButton.classList.add('btn', 'btn-primary')
+   cardButton.innerText = `Ver Info`
+   cardButton.setAttribute('mark', ciudad.id)
+   cardButton.addEventListener('click', getInfo)
 
-        card.className = "card"
+   cardBody.append(cardCity)
+   cardBody.append(cardStile)
+   cardBody.append(cardButton)
+   container.append(cardBody)
+   catalog.append(container)
 
-        card.innerHTML = `<h2>${ciudad.nombre}</h2>`
+})
 
-        catalogo.append(card)
-    }
+/*Librerías: intenté poner el link en el cartel pero no pude. La idea es que les aparezca el link al evento cuando seleccionen cualquier ciudad del catálogo*/
+
+function getInfo(event){
+   info.push(event.target.getAttribute('mark'))
+   Swal.fire({
+      title: '<strong>Hemos encontrado este evento para vos!</strong>',
+      icon: 'info',
+      html:
+        'Puedes ingresar al siguiente link para encontrar toda la información: ' +
+        '<a href="//sweetalert2.github.io">https://www.instagram.com/infoticketsarg/</a> ',
+      focusConfirm: false,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> Seguir buscando',
+    })
+   
 }
-
-render(listaCiudadesconStock)
-
-let estiloElegido = ''
-
-let estilo = document.getElementById("estilo")
-estilo.addEventListener("change", ()=>{estiloElegido = estilo.value})
-
-let botonFiltrado = document.getElementById("filtrar")
-botonFiltrado.addEventListener("click", filtrado)
-
-function filtrado(){
-    let filtroEstilo = listaCiudadesconStock.filter((ciudad)=> ciudad.estilo == estiloElegido)
-    render(filtroEstilo)
-}
-
-let botonTodas = document.getElementById("verTodas")
-
-botonTodas.addEventListener("click", ()=>render(listaCiudadesconStock))
 
 /* Storage & JSON: */
 
@@ -73,5 +141,3 @@ const guardarLocal = (clave, valor) => {localStorage.setItem(clave, valor)}
 for (const ciudad of eventos){
     guardarLocal(ciudad.id, JSON.stringify(ciudad))
 }
-
-/* guardarLocal("ListaEventos", JSON.stringify(eventos)) */
